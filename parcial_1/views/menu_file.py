@@ -31,3 +31,4 @@ def menu_file():
             exit()
         else:
             print('Invalid Option, please try again.')
+            input("\n*Press enter to continue*")

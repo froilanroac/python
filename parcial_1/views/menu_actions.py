@@ -33,44 +33,44 @@ def menu_actions():
             clear_screen()
             all_runners_table(config.runners)
             input()
-        if option == "2":
+        elif option == "2":
             clear_screen()
             total_participants_line(config.runners)
             input()
-        if option == "3":
+        elif option == "3":
             clear_screen()
             participants_age_table(participants_by_age())
             input()
-        if option == "4":
+        elif option == "4":
             clear_screen()
             participants_sex_line(participants_by_sex())
             input()
-        if option == "5":
+        elif option == "5":
             clear_screen()
             winners_age_table(winners_by_age())
             input()
-        if option == "6":
+        elif option == "6":
             clear_screen()
             winners_sex_table(winners_by_sex())
             input()
-        if option == "7":
+        elif option == "7":
             clear_screen()
             winners_age_sex_table(winners_by_sex_age())
             input()
-        if option == "8":
+        elif option == "8":
             clear_screen()
             general_winner_line(general_winner())
             input()
-        if option == "9":
+        elif option == "9":
             clear_screen()
             histogram_age_line(histogram_data())
             input()
-        if option == "10":
+        elif option == "10":
             clear_screen()
             average_age_sex_table(average_age_sex())
             input()
-        
         elif option == "11":
             break
         else:
-            print('Invalid Option, please try again.')
+            print('Invalid option, please try again.')
+            input("\n*Press enter to continue*")

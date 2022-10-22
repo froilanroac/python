@@ -29,7 +29,8 @@ def main_menu():
         elif option == "3":
             exit()
         else:
-            print('Invalid Option, please try again.')
+            print('Invalid option, please try again.')
+            input("\n*Press enter to continue*")
             
 
         
