@@ -1,9 +1,22 @@
 from datetime import time,timedelta
 from data_collection.collector import get_data
 import controller.config as config
+from controller.tools import clear_screen
+
+def data():
+    if len(config.runners) > 0:
+        return True
+    else:
+        return False
 
 def load_runners():
-    data = get_data()
+    clear_screen()
+    f_name = input('Please, type the filename with extension:\n(if it is empty, the system will take the default name competencia.txt):\n')
+    if f_name:
+        data = get_data(file_name=f_name)
+    else:
+        print('Taking default filename...')
+        data = get_data()
     config.runners = arrange_runners(data)
 
 def arrange_runners(data):
@@ -45,21 +58,25 @@ def winners_by_age():
     masters = [x for x in config.runners if int(x['age']) > 40]
     masters.sort(key=lambda r: r['time'])
 
-    runners.update({"Juniors" : juniors[0]})
-    runners.update({"Seniors" : seniors[0]})
-    runners.update({"Masters" : masters[0]})
+    if len(juniors) > 0:
+        runners.update({"Juniors" : juniors[0]})
+    if len(seniors) > 0:   
+        runners.update({"Seniors" : seniors[0]})
+    if len(masters) > 0:
+        runners.update({"Masters" : masters[0]})
     
     return runners
 
 def histogram_data():
     runners = {}
     total_runners = len(config.runners)
-    juniors = len([x for x in config.runners if int(x['age']) < 25]) * 100 / total_runners
-    seniors = len([x for x in config.runners if int(x['age']) >= 25 and int(x['age']) <= 40]) * 100 / total_runners
-    masters = len([x for x in config.runners if int(x['age']) > 40]) * 100 / total_runners
-    runners.update({"juniors" : juniors})
-    runners.update({"seniors" : seniors})
-    runners.update({"masters" : masters})
+    if total_runners > 0:
+        juniors = len([x for x in config.runners if int(x['age']) < 25]) * 100 / total_runners
+        seniors = len([x for x in config.runners if int(x['age']) >= 25 and int(x['age']) <= 40]) * 100 / total_runners
+        masters = len([x for x in config.runners if int(x['age']) > 40]) * 100 / total_runners
+        runners.update({"juniors" : juniors})
+        runners.update({"seniors" : seniors})
+        runners.update({"masters" : masters})        
     return runners
 
 def winners_by_sex():
@@ -69,8 +86,10 @@ def winners_by_sex():
     female = [x for x in config.runners if x['sex'].upper() == 'F']
     female.sort(key=lambda r: r['time'])
 
-    runners.update({"male" : male[0]})
-    runners.update({"female" : female[0]})
+    if len(male) > 0:
+        runners.update({"male" : male[0]})
+    if len(female) > 0:
+        runners.update({"female" : female[0]})
 
 
     return runners
@@ -92,18 +111,27 @@ def winners_by_sex_age():
     masters_f = [x for x in config.runners if int(x['age']) > 40 and x['sex'].upper() == 'F']
     masters_f.sort(key=lambda r: r['time'])
 
-    runners.update({"Juniors_Male" : juniors_m[0]})
-    runners.update({"Juniors_Female" : juniors_f[0]})
-    runners.update({"Seniors_Male" : seniors_m[0]})
-    runners.update({"Seniors_Female" : seniors_f[0]})
-    runners.update({"Masters_Male" : masters_m[0]})
-    runners.update({"Masters_Female" : masters_f[0]})
+    if len(juniors_m) > 0:
+        runners.update({"Juniors_Male" : juniors_m[0]})
+    if len(juniors_f) > 0:
+        runners.update({"Juniors_Female" : juniors_f[0]})
+    if len(seniors_m) > 0:
+        runners.update({"Seniors_Male" : seniors_m[0]})
+    if len(seniors_f) > 0:
+        runners.update({"Seniors_Female" : seniors_f[0]})
+    if len(masters_m) > 0:
+        runners.update({"Masters_Male" : masters_m[0]})
+    if len(masters_f) > 0:
+        runners.update({"Masters_Female" : masters_f[0]})
 
     return runners
     
 def general_winner():
-    runners = [x for x in config.runners]
-    return runners[0]
+    runner = [x for x in config.runners]
+    if len(runner) > 0:
+        return runner[0]
+    else:
+        return []
 
 def average_age_sex():
     runners = {}
@@ -119,9 +147,12 @@ def average_age_sex():
 
 def time_average(list):
     aux = []
-    for i in list:
-        aux.append(i.strftime("%H:%M:%S"))
-    return str(timedelta(seconds=sum(map(lambda f: int(f[0])*3600 + int(f[1])*60 + int(f[2]), map(lambda f: f.split(':'), aux)))/len(aux)))
+    if len(list) > 0:
+        for i in list:
+            aux.append(i.strftime("%H:%M:%S"))
+        return str(timedelta(seconds=sum(map(lambda f: int(f[0])*3600 + int(f[1])*60 + int(f[2]), map(lambda f: f.split(':'), aux)))/len(aux)))
+    else:
+        return 0
 
 
 

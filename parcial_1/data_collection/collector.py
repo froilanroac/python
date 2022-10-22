@@ -3,12 +3,12 @@ from exceptions.load_exceptions import incorrect_file_type, incorrect_runner_fie
 
 def get_data(file_name = 'competencia.txt'):
     if ".txt" in file_name:
-        file = open(f"parcial_1/competencia.txt", "rt")
+        file = open(f"parcial_1/{file_name}", "rt")
         validate_file(file)
         file.seek(0)
         data = arrange_data(file)
         file.close()
-        return data
+        return data        
     else:
         raise incorrect_file_type("The file type is not .txt")
 

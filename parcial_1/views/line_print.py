@@ -1,44 +1,48 @@
+from controller.tools import clear_screen
+from views.tables_print import format_runner_table
 def total_participants_line(runners):
+    clear_screen()
+    print("------------------------------------------------------")
+    print("Total participants by line:")
     print(f"The total number of participants was {len(runners)}")
+    print("------------------------------------------------------")
+    input("\n*Press enter to continue*")
 
 def participants_sex_line(runners):
+    clear_screen()
+    print("------------------------------------------------------------------------------------------")
+    print("Total participants by sex on line:")
     print(f"The total of male runners was {runners['Male']} and female runners was {runners['Female']}")
+    print("------------------------------------------------------------------------------------------")
+    input("\n*Press enter to continue*")
 
 def general_winner_line(runner):
-    print("The General winner is:" )
-    print ("{:<10} {:<12} {:<18} {:<15} {:<12} {:<4} {:<4} {:<9}".format("ID"
-                                                                ,"Last Name"
-                                                                ,"Second Last Name"
-                                                                ,"First Name"
-                                                                ,"Second Name"
-                                                                ,"Sex"
-                                                                ,"Age"
-                                                                ,"Time"
-                                                                ))
+    clear_screen()
+    print("-----------------------")
+    print("General winner by line:")
+    print("-----------------------")
     if runner:
-        print ("{:<10} {:<12} {:<18} {:<15} {:<12} {:<4} {:<4} {:<9}".format(
-                                                    runner['id'],
-                                                    runner['firstLastName'],
-                                                    runner['secondLastName'],
-                                                    runner['firstName'],
-                                                    runner['initialSecondName'],
-                                                    runner['sex'],
-                                                    runner['age'],
-                                                    str(runner['time'])))
+        format_runner_table([runner])
+    input("\n*Press enter to continue*")
 
 def histogram_age_line(runners):
-    print(f"Juniors ({round(runners['juniors'])}): | ",end="")
-    for i in range(round(runners['juniors'])):
-        print("*", end="")
-    print()
-    print(f"Seniors ({round(runners['seniors'])}): | ",end="")
-    for i in range(round(runners['seniors'])):
-        print("*", end="")
-    print()
-    print(f"Masters ({round(runners['masters'])}): | ",end="")
-    for i in range(round(runners['masters'])):
-        print("*", end="")
-    print()
-
-def average_age_sex_line(runners):
-    print(runners)
+    clear_screen()
+    print("-----------------------")
+    print("Histogram by age line:")
+    print("-----------------------")
+    if 'juniors' in runners:
+        print(f"Juniors ({round(runners['juniors'])}): | ",end="")
+        for i in range(round(runners['juniors'])):
+            print("*", end="")
+        print()
+    if 'seniors' in runners:
+        print(f"Seniors ({round(runners['seniors'])}): | ",end="")
+        for i in range(round(runners['seniors'])):
+            print("*", end="")
+        print()
+    if 'masters' in runners:
+        print(f"Masters ({round(runners['masters'])}): | ",end="")
+        for i in range(round(runners['masters'])):
+            print("*", end="")
+        print()
+    input("\n*Press enter to continue*")

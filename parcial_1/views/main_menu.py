@@ -1,13 +1,18 @@
 from controller.tools import exit, clear_screen
+from controller.logic import data
 from views.menu_file import menu_file
 from views.menu_actions import menu_actions
 
-def menu():
+def main_menu():
 
-    menu_options = {"1": "File", "2": "Actions", "3": "Finish Program"}
+    menu_options = {"1": " File", "2": " Actions", "3": " Finish Program"}
 
     while True:
+
         clear_screen()
+        print("*********************Parcial 1*********************")
+        print("---------------------------------------------------")
+        print("Options:\n")
 
         for key, value in menu_options.items():
             print(key, value)
@@ -17,7 +22,10 @@ def menu():
         if option == "1":
             menu_file()
         elif option == "2":
-            menu_actions()
+            if data():
+                menu_actions()
+            else:
+                input("Error, there is not data loaded, please load a file first.")
         elif option == "3":
             exit()
         else:
