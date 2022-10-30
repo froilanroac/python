@@ -38,8 +38,8 @@ def arrange_runners(data):
 
 def participants_by_age():
     runners = {}
-    runners.update({"Juniors" : len([x for x in config.runners if int(x['age']) < 25])})
-    runners.update({"Seniors" : len([x for x in config.runners if int(x['age']) >= 25 and int(x['age']) <= 40])})
+    runners.update({"Juniors" : len([x for x in config.runners if int(x['age']) <= 25])})
+    runners.update({"Seniors" : len([x for x in config.runners if int(x['age']) > 25 and int(x['age']) <= 40])})
     runners.update({"Masters" : len([x for x in config.runners if int(x['age']) > 40])})
     return runners
 
@@ -136,10 +136,10 @@ def general_winner():
 def average_age_sex():
     runners = {}
     
-    runners.update({"juniors_male": time_average([x['time'] for x in config.runners if int(x['age']) < 25 and x['sex'].upper() == 'M'])})
-    runners.update({"juniors_female": time_average([x['time'] for x in config.runners if int(x['age']) < 25 and x['sex'].upper() == 'F'])})
-    runners.update({"seniors_male": time_average([x['time'] for x in config.runners if int(x['age']) >= 25 and int(x['age']) <= 40 and x['sex'].upper() == 'M'])})
-    runners.update({"seniors_female": time_average([x['time'] for x in config.runners if int(x['age']) >= 25 and int(x['age']) <= 40 and x['sex'].upper() == 'F'])})
+    runners.update({"juniors_male": time_average([x['time'] for x in config.runners if int(x['age']) <= 25 and x['sex'].upper() == 'M'])})
+    runners.update({"juniors_female": time_average([x['time'] for x in config.runners if int(x['age']) <= 25 and x['sex'].upper() == 'F'])})
+    runners.update({"seniors_male": time_average([x['time'] for x in config.runners if int(x['age']) > 25 and int(x['age']) <= 40 and x['sex'].upper() == 'M'])})
+    runners.update({"seniors_female": time_average([x['time'] for x in config.runners if int(x['age']) > 25 and int(x['age']) <= 40 and x['sex'].upper() == 'F'])})
     runners.update({"masters_male": time_average([x['time'] for x in config.runners if int(x['age']) > 40 and x['sex'].upper() == 'M'])})
     runners.update({"masters_female": time_average([x['time'] for x in config.runners if int(x['age']) > 40 and x['sex'].upper() == 'F'])})
 
