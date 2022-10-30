@@ -3,6 +3,8 @@ from controller.logic import participants_by_age, participants_by_sex, winners_b
 from views.tables_print import all_runners_table, participants_age_table, winners_age_table, winners_age_sex_table, winners_sex_table, average_age_sex_table
 from views.line_print import total_participants_line, participants_sex_line, general_winner_line, histogram_age_line
 import controller.config as config
+
+# menu de acciones de la aplicacion.
 def menu_actions():
     clear_screen()
 

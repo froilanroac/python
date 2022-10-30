@@ -1,4 +1,6 @@
 from controller.tools import  clear_screen
+# todas las funciones imprimen los resultados en forma de tabla.
+# funcion que formatea los corredores e imprime una tabla con la informacion.
 def format_runner_table(runners):
     print("------------------------------------------------------------------------------------------")
     print ("{:<10} {:<12} {:<18} {:<15} {:<12} {:<4} {:<4} {:<9}".format("ID"
@@ -23,6 +25,7 @@ def format_runner_table(runners):
                                                     str(runner['time'])))
     print("------------------------------------------------------------------------------------------\n")
 
+# funcion que imprime todos los corredores que participaron en una tabla.
 def all_runners_table(runners):
     clear_screen()
     print("**************************************")
@@ -31,6 +34,7 @@ def all_runners_table(runners):
     format_runner_table(runners)
     input("*Press enter to continue*")
 
+# funcion que imprime la cantidad de participantes por grupo etario.
 def participants_age_table(runners):
     clear_screen()
     print("**************************************")
@@ -42,6 +46,7 @@ def participants_age_table(runners):
         print ("{:<10} {:<12}".format(key,value))
     input("\n*Press enter to continue*")
 
+# funcion que imprime todos los ganadores por grupos etarios.
 def winners_age_table(runners):
 
     clear_screen()
@@ -60,6 +65,7 @@ def winners_age_table(runners):
         format_runner_table([runners['Masters']])
     input("\n*Press enter to continue*")
 
+# funcion que imprime todos los ganadores por grupo etario y por sexo.
 def winners_age_sex_table(runners):
     clear_screen()
     print("**********************************************")
@@ -86,6 +92,7 @@ def winners_age_sex_table(runners):
         format_runner_table([runners['Masters_Female']])
     input("\n*Press enter to continue*")
 
+# funcion que imprime todos los ganadores por sexo.
 def winners_sex_table(runners):
 
     clear_screen()
@@ -101,6 +108,7 @@ def winners_sex_table(runners):
         format_runner_table([runners['female']])
     input("\n*Press enter to continue*")
 
+# funcion que imprime el promedio de tiempo por grupos etarios y por sexo.
 def average_age_sex_table(runners):
     clear_screen()
     print("******************************************************")
