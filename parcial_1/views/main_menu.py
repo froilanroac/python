@@ -1,11 +1,11 @@
-from controller.tools import exit, clear_screen
+from controller.tools import clear_screen
 from controller.logic import data
 from views.menu_file import menu_file
 from views.menu_actions import menu_actions
 
 def main_menu():
 
-    menu_options = {"1": " File", "2": " Actions", "3": " Finish Program"}
+    menu_options = {"1": " File", "2": " Actions"}
 
     while True:
 
@@ -26,8 +26,6 @@ def main_menu():
                 menu_actions()
             else:
                 input("Error, there is not data loaded, please load a file first.")
-        elif option == "3":
-            exit()
         else:
             print('Invalid option, please try again.')
             input("\n*Press enter to continue*")

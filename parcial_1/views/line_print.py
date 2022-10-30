@@ -1,5 +1,7 @@
 from controller.tools import clear_screen
 from views.tables_print import format_runner_table
+# todas las funciones aqui imprimen la inforacion en una sola linea.
+# imprime todos los paricipantes de la competencia.
 def total_participants_line(runners):
     clear_screen()
     print("------------------------------------------------------")
@@ -8,6 +10,7 @@ def total_participants_line(runners):
     print("------------------------------------------------------")
     input("\n*Press enter to continue*")
 
+# fucnion que imprime los participantes por sexo.
 def participants_sex_line(runners):
     clear_screen()
     print("------------------------------------------------------------------------------------------")
@@ -16,6 +19,7 @@ def participants_sex_line(runners):
     print("------------------------------------------------------------------------------------------")
     input("\n*Press enter to continue*")
 
+# funcion que imprime quien fue el ganador general.
 def general_winner_line(runner):
     clear_screen()
     print("-----------------------")
@@ -25,6 +29,7 @@ def general_winner_line(runner):
         format_runner_table([runner])
     input("\n*Press enter to continue*")
 
+# funcion que imprime el histograma de los participantes por grupo etario.
 def histogram_age_line(runners):
     clear_screen()
     print("-----------------------")

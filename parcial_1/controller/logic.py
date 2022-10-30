@@ -3,12 +3,14 @@ from data_collection.collector import get_data
 import controller.config as config
 from controller.tools import clear_screen
 
+# regresa true o false si se tienen corredores cargados en el sistema.
 def data():
     if len(config.runners) > 0:
         return True
     else:
         return False
 
+# funcion que carga en el sistema los corredores.
 def load_runners():
     clear_screen()
     f_name = input('Please, type the filename with extension:\n(if it is empty, the system will take the default name competencia.txt):\n')
@@ -19,6 +21,7 @@ def load_runners():
         data = get_data()
     config.runners = arrange_runners(data)
 
+# funcion que arregla los corredores como un diccionario.
 def arrange_runners(data):
     runners = []
     for line in data:
@@ -36,6 +39,7 @@ def arrange_runners(data):
     runners.sort(key=lambda r: r['time'])
     return runners
 
+# funcion que regresa un diccionario con la cuenta de los corredores segun su edad.
 def participants_by_age():
     runners = {}
     runners.update({"Juniors" : len([x for x in config.runners if int(x['age']) <= 25])})
@@ -43,12 +47,14 @@ def participants_by_age():
     runners.update({"Masters" : len([x for x in config.runners if int(x['age']) > 40])})
     return runners
 
+# funcion que regresa la cuenta de cuantos hombres y mujeres corrieron la competencia.
 def participants_by_sex():
     runners = {}
     runners.update({"Male"  : len([x for x in config.runners if x['sex'].upper() == "M"])})
     runners.update({"Female": len([x for x in config.runners if x['sex'].upper() == "F"])})
     return runners
 
+# funcion que regresa en un diccionario los ganadores por grupo etario.
 def winners_by_age():
     runners = {}
     juniors = [x for x in config.runners if int(x['age']) < 25]
@@ -67,6 +73,7 @@ def winners_by_age():
     
     return runners
 
+# funcion que regresa la data para el histograma.
 def histogram_data():
     runners = {}
     total_runners = len(config.runners)
@@ -79,6 +86,7 @@ def histogram_data():
         runners.update({"masters" : masters})        
     return runners
 
+# funcion que regresa los ganadores por sexo.
 def winners_by_sex():
     runners = {}
     male = [x for x in config.runners if x['sex'].upper() == 'M']
@@ -94,6 +102,7 @@ def winners_by_sex():
 
     return runners
 
+# funcion que regresa los ganadores por sexo y grupo etario.
 def winners_by_sex_age():
     runners = {}
     juniors_m = [x for x in config.runners if int(x['age']) < 25 and x['sex'].upper() == 'M']
@@ -125,7 +134,8 @@ def winners_by_sex_age():
         runners.update({"Masters_Female" : masters_f[0]})
 
     return runners
-    
+
+# funcion que regresa el ganador general de la competencia.  
 def general_winner():
     runner = [x for x in config.runners]
     if len(runner) > 0:
@@ -133,6 +143,7 @@ def general_winner():
     else:
         return []
 
+# funcion que regresa el promedio de tiempo de todos los grupos etarios por sexo.
 def average_age_sex():
     runners = {}
     
@@ -145,6 +156,7 @@ def average_age_sex():
 
     return runners
 
+# funcion que calcula el tiempo promedio de una lista de tiempos.
 def time_average(list):
     aux = []
     if len(list) > 0:
