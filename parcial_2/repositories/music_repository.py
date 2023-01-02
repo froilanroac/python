@@ -1,7 +1,7 @@
 from typing import List
 from sqlalchemy.orm import Session
 from schemas.schemas import AlbumInDB, ArtistBase, TrackInDB
-from models.models import Albumes, Artist, Track
+from models.models import Albumes, Artist, Track, MediaType, Genre
 
 
 class MusicRepository:
@@ -35,4 +35,8 @@ class MusicRepository:
 
     async def get_track_by_id(self, *, id: int, db: Session) -> TrackInDB:
         song: TrackInDB = db.query(Track).get(id)
+        genre: Genre = db.query(Genre).get(song.GenreId)
+        media_type: MediaType = db.query(MediaType).get(song.MediaTypeId)
+        song.Genre = str(genre.Name) if genre else None
+        song.MediaType = str(media_type.Name) if media_type else None
         return song

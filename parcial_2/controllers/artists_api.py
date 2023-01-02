@@ -17,7 +17,10 @@ async def get_all_artist(
     db: Session = Depends(get_db),
     music_repo: MusicRepository = Depends(get_music_repo),
 ) -> List[ArtistInDB]:
-    return await music_repo.get_all_artist(db=db)
+    artist = await music_repo.get_all_artist(db=db)
+    if not artist:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+    return artist
 
 
 @router.get("/{id}", response_model=List[AlbumInDB], status_code=status.HTTP_200_OK)

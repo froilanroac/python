@@ -26,3 +26,15 @@ class Track(Base):
     Milliseconds = Column(Integer)
     Bytes = Column(Integer)
     UnitPrice = Column(Float)
+
+
+class Genre(Base):
+    __tablename__ = 'genres'
+    GenreId = Column(Integer, primary_key=True, index=True)
+    Name = Column(String)
+
+
+class MediaType(Base):
+    __tablename__ = 'media_types'
+    MediaTypeId = Column(Integer, primary_key=True, index=True)
+    Name = Column(String)
